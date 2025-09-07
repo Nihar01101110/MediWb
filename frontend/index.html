@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <link
+    href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css"
+    rel="stylesheet"
+  />
+  <title>MediWeb</title>
+</head>
+<body>
+  <div class="main">
+    <!-- ✅ Navbar -->
+    <div class="navbar">
+      <div class="logo"><a href=""><span>Med</span>iW<span>b</span></a></div>
+      <!-- <ul class="nav-links">
+        <li><a href="/index.html">Home</a></li>
+        <li><a href="/medicineSearch.html">Medicines</a></li>
+        <li><a href="/chatBot.html">Chatbot</a></li>
+        <li><a href="/map.html">Map</a></li>
+        <li><a href="/faqs.html">FAQS</a></li>
+      </ul> -->
+      <div class="auth-buttons">
+        <button class="signup"><a href="/signup.html">Sign Up</a></button>
+        <button class="signin"><a href="/login.html">Sign In</a></button>
+      </div>
+    </div>
+
+    <!-- ✅ Page Content -->
+    <div class="content">
+      <div class="con">
+        <div class="headline">
+          <h2>Because Your Health</h2>
+          <h2>Deserves Clarity</h2>
+        </div>
+      </div>
+    </div>
+
+    <div class="short">
+      <div class="box1"><p class="number">1</p><p>MediWeb</p></div>
+      <div class="box2"><p class="number">2</p><p>One Click Health</p></div>
+      <div class="box3"><p class="number">3</p><p>Quick Clarity</p></div>
+    </div>
+
+    <div class="set">
+      <div class="fstline">
+        Fast, reliable, and easy medical information at your fingertips. Know your medicines, avoid risks, and find help nearby.
+      </div>
+    </div>
+
+    <div class="tagline">
+      <h1><span>Our solution </span>empowers patients to make <span>informed decisions</span> by enhancing clarity, safety, and accessibility in everyday <span>healthcare.</span></h1>
+    </div>
+
+    <div class="med">
+      <div class="medsec1">
+        <div class="inn">
+          <h1>Trusted Guidance</h1>
+          <h1 class="end">for safer medicine use.</h1>
+        </div>
+        <div class="para">
+          <p>Discover the right time to take your medicines, dietary preferences that support treatment, and trusted substitutes when needed. Designed to simplify complex medical details, this feature ensures patients have access to practical guidance for everyday health management.</p>
+          <button>See How does it works</button>
+        </div>
+        <div class="imgbox">
+          <div class="imag">
+            <img src="https://i.pinimg.com/1200x/14/15/a8/1415a8a97eb5e388d6980eac0fbf2f55.jpg" alt="">
+            <img src="https://i.pinimg.com/1200x/13/85/a5/1385a58dd8a68bc41ad77743a1623c34.jpg" alt="">
+          </div>
+        </div>
+      </div>
+
+      <div class="medsec2">
+        <div class="textbox">
+          <div class="textbox1">
+            <p class="same"><i class="ri-chat-ai-fill"></i></p>
+            <h2 class="same">Chatbot feature</h2>
+            <p>Users can simply type or speak their queries — from asking about a medicine’s usage to checking possible substitutes — and receive instant, reliable answers.</p>
+          </div>
+          <div class="textbox2">
+            <p class="same"><i class="ri-map-pin-2-fill"></i></p>
+            <h2 class="same">Map feature</h2>
+            <p>Locate nearby hospitals, clinics, and pharmacies with ease. By integrating smart location services, it ensures that essential healthcare facilities are always within reach.</p>
+          </div>
+          <div class="textbox3">
+            <p class="same"><i class="ri-information-2-fill"></i></p>
+            <h2 class="same">FAQS feature</h2>
+            <p>From understanding safe medicine usage to learning basic first-aid practices for burns, cuts, or fainting, It is designed to support users with accurate, easy-to-follow information that promotes safety, awareness, and timely action.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="doubt">
+      <div class="left">
+        <p class="same"><i class="ri-flashlight-fill"></i></p>
+        <h1>Got Questions?</h1>
+        <h1 class="same">We've Got Answers!</h1>
+      </div>
+      <div class="right">
+        <div class="plus">
+          <div class="pa">
+            <p>What is this website about?</p>
+            <p class="same i" onclick="toggleAnswer(this)"><i class="ri-add-circle-fill"></i></p>
+          </div>
+          <p class="answer">Provides reliable medicine information, substitutes, usage guidance, and nearby healthcare facilities.</p>
+        </div>
+        <div class="plus">
+          <div class="pa">
+            <p>Is the information on this website accurate?</p>
+            <p class="same i" onclick="toggleAnswer(this)"><i class="ri-add-circle-fill"></i></p>
+          </div>
+          <p class="answer">Yes, the content is based on trusted medical sources. However, it is for informational purposes only and not a substitute for professional medical advice.</p>
+        </div>
+        <div class="plus">
+          <div class="pa">
+            <p>Can this website suggest medicines for my symptoms?</p>
+            <p class="same i" onclick="toggleAnswer(this)"><i class="ri-add-circle-fill"></i></p>
+          </div>
+          <p class="answer">The platform can provide general information but does not replace a doctor’s consultation.</p>
+        </div>
+        <div class="plus">
+          <div class="pa">
+            <p>How do I search for a medicine?</p>
+            <p class="same i" onclick="toggleAnswer(this)"><i class="ri-add-circle-fill"></i></p>
+          </div>
+          <p class="answer">Use the search bar on the home page and enter the name of the medicine.</p>
+        </div>
+        <div class="plus">
+          <div class="pa">
+            <p>Does the website provide dosage instructions?</p>
+            <p class="same i" onclick="toggleAnswer(this)"><i class="ri-add-circle-fill"></i></p>
+          </div>
+          <p class="answer">It provides general timing and food-related guidance, but dosage must always follow a doctor’s prescription.</p>
+        </div>
+        <div class="plus">
+          <div class="pa">
+            <p>Can I find substitutes for a medicine here?</p>
+            <p class="same i" onclick="toggleAnswer(this)"><i class="ri-add-circle-fill"></i></p>
+          </div>
+          <p class="answer">Yes, the website suggests alternatives with the same composition.</p>
+        </div>
+        <div class="plus">
+          <div class="pa">
+            <p>Does this website show nearby hospitals and pharmacies?</p>
+            <p class="same i" onclick="toggleAnswer(this)"><i class="ri-add-circle-fill"></i></p>
+          </div>
+          <p class="answer">Yes, through the integrated map feature.</p>
+        </div>
+        <div class="plus">
+          <div class="pa">
+            <p>Is my personal information safe on this website?</p>
+            <p class="same i" onclick="toggleAnswer(this)"><i class="ri-add-circle-fill"></i></p>
+          </div>
+          <p class="answer">Yes, user privacy and safety are a priority.</p>
+        </div>
+        <div class="plus">
+          <div class="pa">
+            <p>Is the website free to use?</p>
+            <p class="same i" onclick="toggleAnswer(this)"><i class="ri-add-circle-fill"></i></p>
+          </div>
+          <p class="answer">Yes, it is completely free and accessible to everyone.</p>
+        </div>
+        <div class="plus">
+          <div class="pa">
+            <p>Can I rely only on this website for my treatment?</p>
+            <p class="same i" onclick="toggleAnswer(this)"><i class="ri-add-circle-fill"></i></p>
+          </div>
+          <p class="answer">No — it is meant to provide support and guidance, but always consult a healthcare professional for treatment decisions.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">
+      <div class="icons">
+        <ul>
+          <li><a href="" class="same"><i class="ri-facebook-circle-fill"></i></a></li>
+          <li><a href="" class="same"><i class="ri-twitter-x-line"></i></a></li>
+          <li><a href="" class="same"><i class="ri-linkedin-box-fill"></i></a></li>
+          <li><a href="" class="same"><i class="ri-whatsapp-fill"></i></a></li>
+          <li><a href="" class="same"><i class="ri-instagram-fill"></i></a></li>
+          <li><a href="" class="same"><i class="ri-github-fill"></i></a></li>
+        </ul>
+      </div>
+      <div class="reserve">MediWeb &copy;2025; All Rights Reserved.</div>
+    </div>
+  </div>
+
+  <!-- Accordion Script -->
+  <script>
+    function toggleAnswer(element) {
+      // close all answers first
+      document.querySelectorAll(".answer").forEach(ans => {
+        ans.classList.remove("show");
+      });
+      document.querySelectorAll(".pa i").forEach(icon => {
+        icon.classList.remove("ri-indeterminate-circle-fill");
+        icon.classList.add("ri-add-circle-fill");
+      });
+
+      // open the selected one
+      let answer = element.parentElement.nextElementSibling;
+      let icon = element.querySelector("i");
+
+      if (!answer.classList.contains("show")) {
+        answer.classList.add("show");
+        icon.classList.remove("ri-add-circle-fill");
+        icon.classList.add("ri-indeterminate-circle-fill");
+      }
+    }
+  </script>
+</body>
+</html>

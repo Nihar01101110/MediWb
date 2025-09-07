@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MediWeb - Chatbot</title>
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg: rgba(139, 201, 139, 0.486);
+      --card: #ffffff;
+      --muted: #55606a;
+      --accent: rgb(13, 88, 42);
+      --radius: 12px;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    * {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      background: linear-gradient(180deg, var(--bg), #eef6fb);
+      color: black;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    .nav {
+      width: 100%;
+      height: 10%;
+      background-color: rgb(13, 88, 42);
+      z-index: 999;
+      backdrop-filter: blur(7px);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: fixed;
+    }
+    .logo {
+      margin-left: 60px;
+    }
+    .logo a {
+      text-decoration: none;
+      color: white;
+      font-size: 2.3rem;
+    }
+    .nav-links {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 32px;
+      list-style: none;
+    }
+    .nav-links li a {
+      text-decoration: none;
+      color: white;
+      font-size: 0.95rem;
+    }
+    .nav-links li a:hover {
+      cursor: pointer;
+      color: rgba(139, 201, 139, 0.486);
+    }
+    .i {
+      margin-right: 60px;
+    }
+
+    .main {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding-top: 100px; /* to push content below navbar */
+    }
+    .wrapper {
+      width: 100%;
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 20px;
+    }
+    .card {
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(10px);
+      padding: 30px;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+    }
+    .card h3 {
+      text-align: center;
+      font-size: 2rem;
+      color: rgb(13, 88, 42);
+      margin-bottom: 10px;
+      font-weight: 600;
+    }
+    .card p {
+      text-align: center;
+      color: #555;
+      margin-top: 0;
+      margin-bottom: 25px;
+    }
+
+    .chat-box {
+      height: 450px;
+      overflow-y: auto;
+      border: 1px solid #ddd;
+      border-radius: 12px;
+      padding: 15px;
+      background: #fdfdfd;
+      display: flex;
+      flex-direction: column;
+    }
+    .message {
+      margin: 8px 0;
+      padding: 12px 16px;
+      border-radius: 18px;
+      max-width: 75%;
+      word-wrap: break-word;
+      line-height: 1.5;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+    }
+    .user {
+      background: linear-gradient(135deg, #0d582a, #2b8c2b);
+      color: #fff;
+      margin-left: auto;
+      border-bottom-right-radius: 4px;
+    }
+    .bot {
+      background: #e9ecef;
+      color: #333;
+      margin-right: auto;
+      border-bottom-left-radius: 4px;
+    }
+
+    .chat-input {
+      display: flex;
+      margin-top: 20px;
+      gap: 10px;
+    }
+    .chat-input input {
+      flex: 1;
+      padding: 14px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      font-size: 1rem;
+    }
+    .chat-input button {
+      padding: 12px 25px;
+      border: none;
+      border-radius: 10px;
+      background-color: rgb(13, 88, 42);
+      border: 2px solid rgb(13, 88, 42);
+      color: white;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .chat-input button:hover {
+      background: transparent;
+      color: rgb(13, 88, 42);
+    }
+  </style>
+</head>
+<body>
+
+  <navbar>
+    <div class="nav">
+      <div class="logo"><a href=""><span>Med</span>iW<span>b</span></a></div>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="medicineSearch.html">Medicines</a></li>
+        <li><a href="chatBot.html">Chatbot</a></li>
+        <li><a href="map.html">Map</a></li>
+        <li class="i"><a href="faqs.html">FAQS</a></li>
+      </ul>
+    </div>
+  </navbar>
+
+  <div class="main">
+    <div class="wrapper">
+      <div class="card">
+        <h3>🤖 AI Chatbot</h3>
+        <p>You can ask about symptoms, treatments, or general health questions. This is not a substitute for professional medical advice.</p>
+        <div id="chatBox" class="chat-box"></div>
+        <div class="chat-input">
+          <input type="text" id="userInput" placeholder="Ask about symptoms, wellness, etc.">
+          <button onclick="sendMessage()">Send</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const chatBox = document.getElementById("chatBox");
+    const userInput = document.getElementById("userInput");
+    let chatHistory = [];
+
+    function appendMessage(text, sender) {
+      const div = document.createElement("div");
+      div.className = `message ${sender}`;
+      div.innerText = text;
+      chatBox.appendChild(div);
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }
+
+    async function sendMessage() {
+      const text = userInput.value.trim();
+      if (!text) return;
+
+      appendMessage(text, "user");
+      chatHistory.push({ role: "user", parts: [{ text }] });
+      userInput.value = "";
+
+      const loadingDiv = document.createElement("div");
+      loadingDiv.className = "message bot";
+      loadingDiv.innerText = "⏳ Thinking...";
+      chatBox.appendChild(loadingDiv);
+      chatBox.scrollTop = chatBox.scrollHeight;
+
+      try {
+        const res = await fetch('/api/chat', {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ history: chatHistory })
+        });
+
+        chatBox.removeChild(loadingDiv);
+        const data = await res.json();
+
+        if (!res.ok) {
+          appendMessage(`❌ Error: ${data.error || 'Failed to get response.'}`, "bot");
+          return;
+        }
+
+        const botReply = data.candidates?.[0]?.content?.parts?.[0]?.text || "⚠️ Sorry, I couldn't get a response.";
+        appendMessage(botReply, "bot");
+        chatHistory.push({ role: "model", parts: [{ text: botReply }] });
+
+      } catch (error) {
+        chatBox.removeChild(loadingDiv);
+        appendMessage("❌ Error: Could not connect to the server. " + error.message, "bot");
+      }
+    }
+
+    userInput.addEventListener("keypress", e => {
+      if (e.key === "Enter") sendMessage();
+    });
+
+    window.onload = () => {
+      appendMessage("Hello! I am MediWeb AI. How can I help you with your health questions today?", "bot");
+    };
+  </script>
+</body>
+</html>

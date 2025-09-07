@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MediWeb - Login</title>
+    <style>
+        body { 
+            margin:0; 
+            font-family: 'Segoe UI', sans-serif; 
+            background:#f4f8fb; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            height: 100vh; 
+        }
+
+        .card { 
+            background:#fff; 
+            padding:30px; 
+            border-radius:14px; 
+            box-shadow:0 4px 14px rgba(0,0,0,0.15); 
+            width: 350px; 
+        }
+
+        .card h3 { 
+            color: rgb(13, 88, 42);
+            text-align: center; 
+            margin-top: 0; 
+        }
+
+        .form-group { 
+            margin-bottom: 15px; 
+        }
+
+        .form-group label { 
+            display: block; 
+            margin-bottom: 5px; 
+            font-weight: 500; 
+        }
+
+        .form-group input { 
+            width: 100%; 
+            padding: 10px; 
+            border: 1px solid #ccc; 
+            border-radius: 8px; 
+            box-sizing: border-box; 
+        }
+
+        button { 
+            width: 100%; 
+            padding:12px; 
+            border:none; 
+            border-radius:50px; 
+            background: transparent; 
+            border: 2px solid rgb(13, 88, 42); 
+            color: rgb(13, 88, 42); 
+            cursor:pointer; 
+            font-size: 1rem; 
+            transition: 0.3s ease;
+        }
+
+        button:hover { 
+            background: rgb(13, 88, 42); 
+            color:white; 
+            transform: scale(1.05);
+        }
+
+        .message { 
+            text-align: center; 
+            margin-top: 15px; 
+            font-weight: 500; 
+        }
+
+        .signup-link { 
+            text-align: center; 
+            margin-top: 15px; 
+        }
+
+        .signup-link a {
+            color: rgb(13, 88, 42);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .signup-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h3>Login to MediWeb</h3>
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" required>
+            </div>
+            <button type="submit">Log In</button>
+        </form>
+        <div id="message" class="message"></div>
+        <div class="signup-link">
+            Don't have an account? <a href="/signup.html">Sign Up</a>
+        </div>
+    </div>
+
+    <script>
+        const loginForm = document.getElementById('loginForm');
+        const messageDiv = document.getElementById('message');
+
+        loginForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            try {
+                const res = await fetch('/api/auth/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password })
+                });
+
+                const data = await res.json();
+
+                if (res.ok) {
+                    localStorage.setItem('token', data.token); // Store token
+                    messageDiv.textContent = 'Login successful! Redirecting...';
+                    messageDiv.style.color = 'green';
+                    setTimeout(() => { window.location.href = '/medicinesearch.html' }, 1500);
+                } else {
+                    messageDiv.textContent = data.msg || 'An error occurred.';
+                    messageDiv.style.color = 'red';
+                }
+            } catch (err) {
+                messageDiv.textContent = 'A server error occurred. Please try again.';
+                messageDiv.style.color = 'red';
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>First Aid Quick Cards</title>
+  <style>
+    :root{
+      --bg: rgba(139, 201, 139, 0.486);
+      --card: #ffffff;
+      --muted: #55606a;
+      --accent: rgb(13,88,42);
+      --radius: 12px;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    *{
+      padding: 0;
+      margin: 0;
+      box-sizing:border-box
+    }
+    body{
+      margin:0;
+      background:linear-gradient(180deg,var(--bg),#eef6fb);
+      color:black;
+    }
+    .nav{
+      width: 100%;
+      height: 10%;
+      background-color: rgb(13, 88, 42);
+      z-index: 999;
+      backdrop-filter: blur(7px);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: fixed;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    .logo{
+      margin-left: 60px;
+    }
+    .logo a{
+      text-decoration: none;
+      color: white;
+      font-size: 2.3rem;
+    }
+    header{
+      max-width:1100px;
+      margin:0 auto 18px;
+      text-align:center;
+      color:rgb(13, 88, 42);
+    }
+    h1{
+      padding-top: 80px; 
+      font-size:1.5rem;
+    }
+    .nav-links{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 32px;
+      list-style: none;
+    }
+    .nav-links li a:hover{
+      cursor: pointer;
+      color:rgba(139, 201, 139, 0.486);
+    }
+    .nav-links li a{
+      text-decoration: none;
+      color: white;
+      font-size: 0.95rem;
+    }
+    .i{
+      margin-right: 60px;
+    }
+    p.lead{
+      margin:8px 0 0; 
+      color:var(--muted)
+    }
+    main{
+      max-width:1100px;
+      margin: 0 auto;
+    }
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+      gap:16px;
+    }
+    .card{
+      background:var(--card);
+      border-radius:var(--radius);
+      box-shadow: 0 8px 20px rgba(12,35,56,0.06);
+      padding:16px;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    .card h2{margin:0;font-size:1.1rem;color:var(--accent);}
+    .section{background:#f8fdff;border:1px solid #e6f2fa;padding:10px;border-radius:8px;font-size:0.95rem;}
+    .small{font-size:0.88rem;color:var(--muted);} 
+  </style>
+</head>
+<body>
+  <navbar>
+    <div class="nav">
+      <div class="logo"><a href=""><span>Med</span>iW<span>b</span></a></div>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="medicineSearch.html">Medicines</a></li>
+        <li><a href="chatBot.html">Chatbot</a></li>
+        <li><a href="map.html">Map</a></li>
+        <li class="i"><a href="faqs.html">FAQS</a></li>
+      </ul>
+    </div>
+  </navbar>
+
+  <header>
+    <h1>First Aid Quick Cards</h1>
+    <p class="lead">Practical steps for common injuries and emergencies.</p>
+  </header>
+
+  <main>
+    <section class="grid" id="cardsGrid"></section>
+  </main>
+
+  <script>
+    (() => {
+      // Dataset of first aid topics
+      const FIRST_AID = {
+        "Burns": {
+          "do": ["Cool with water 10+ mins","Remove tight items before swelling","Cover with clean cloth"],
+          "dont": ["Don’t apply ice","Don’t use butter or toothpaste"],
+          "when": "Call emergency if burn is large, deep, or on face/hands/genitals."
+        },
+        "Cuts & Bleeding": {
+          "do": ["Apply pressure to stop bleeding","Clean gently with water","Cover with sterile dressing"],
+          "dont": ["Don’t remove embedded objects","Don’t use dirty cloth"],
+          "when": "Call emergency if bleeding won’t stop or wound is large."
+        },
+        "Fainting / Unconsciousness": {
+          "do": ["Lay flat & elevate legs","Loosen tight clothing","Place in recovery position if breathing"],
+          "dont": ["Don’t leave unattended","Don’t give food/drink while unconscious"],
+          "when": "Call emergency if not waking quickly or has breathing problems."
+        },
+        "Choking": {
+          "do": ["Encourage coughing","5 back blows + 5 abdominal thrusts","Start CPR if unconscious"],
+          "dont": ["Don’t do blind sweeps","Don’t delay calling emergency"],
+          "when": "Call emergency if person cannot talk, breathe, or becomes unconscious."
+        },
+        "Nosebleeds": {
+          "do": ["Sit leaning forward","Pinch nose 10 minutes","Avoid blowing nose later"],
+          "dont": ["Don’t tilt head back","Don’t stuff tissues inside"],
+          "when": "Seek help if >20 minutes or very heavy bleeding."
+        },
+        "Sprains & Strains": {
+          "do": ["RICE: Rest, Ice, Compression, Elevation","Avoid weight on painful joint","See doctor if severe"],
+          "dont": ["Don’t apply heat in first 48h","Don’t massage hard"],
+          "when": "Seek care for deformity, numbness, or cannot move limb."
+        },
+        "Fractures": {
+          "do": ["Immobilize with splint","Control bleeding","Keep person still & warm"],
+          "dont": ["Don’t try to realign","Don’t remove embedded objects"],
+          "when": "Call emergency for open fracture, severe deformity, or shock."
+        },
+        "Heatstroke": {
+          "do": ["Move to cool place","Cool skin with cloths/fan","Give sips of water if conscious"],
+          "dont": ["Don’t give lots of cold water if vomiting/confused","Don’t delay care"],
+          "when": "Call emergency for high temp, confusion, or unconsciousness."
+        },
+        "Hypothermia": {
+          "do": ["Move to warm place","Warm chest/neck/head first","Offer warm drinks if conscious"],
+          "dont": ["Don’t rub skin","Don’t give alcohol"],
+          "when": "Call emergency if very cold, confused, or unconscious."
+        },
+        "Poisoning": {
+          "do": ["Call poison control","Rinse skin if chemical","Call emergency if trouble breathing"],
+          "dont": ["Don’t induce vomiting","Don’t give drink unless told"],
+          "when": "Call emergency if seizures, breathing difficulty, or unconsciousness."
+        },
+        "Animal / Insect bites": {
+          "do": ["Wash with soap/water","Remove stinger if visible","Monitor for infection or allergy"],
+          "dont": ["Don’t cut wound","Don’t suck out venom"],
+          "when": "Seek emergency for severe allergy or venomous bite."
+        }
+      };
+
+      const grid = document.getElementById('cardsGrid');
+      Object.keys(FIRST_AID).forEach(title => {
+        const info = FIRST_AID[title];
+
+        const card = document.createElement('article');
+        card.className = 'card';
+
+        const h2 = document.createElement('h2');
+        h2.textContent = title;
+
+        const doDiv = document.createElement('div');
+        doDiv.className = 'section';
+        doDiv.innerHTML = `<strong>Do:</strong><br>${info.do.map(s => '• ' + s).join('<br>')}`;
+
+        const dontDiv = document.createElement('div');
+        dontDiv.className = 'section';
+        dontDiv.innerHTML = `<strong>Don't:</strong><br>${info.dont.map(s => '• ' + s).join('<br>')}`;
+
+        const whenDiv = document.createElement('div');
+        whenDiv.className = 'small';
+        whenDiv.innerHTML = `<em>When to call emergency:</em> ${info.when}`;
+
+        card.append(h2, doDiv, dontDiv, whenDiv);
+        grid.appendChild(card);
+      });
+    })();
+  </script>
+</body>
+</html>

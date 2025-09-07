@@ -1,0 +1,439 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body,html{
+    width: 100%;
+    height: 100%;
+}
+.main{
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(rgba(0,0,0,0.4)),url("https://i.pinimg.com/736x/24/db/67/24db676a6e1c881af5c17e86babfaac5.jpg");
+    background-position: top;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.navbar{
+    width: 100%;
+    height: 10%;
+    background-color: transparent;
+    backdrop-filter: blur(10px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.logo{
+    margin-left: 60px;
+}
+.logo a{
+    text-decoration: none;
+    color: white;
+    font-size: 2.3rem;
+}
+/* Ensure MedWeb logo styling is consistent across pages with light backgrounds */
+.navbar .logo a { color: white; }
+/* .signin{
+    margin-right: 60px;
+    text-decoration: none;
+    background-color: transparent;
+    padding: 6px 15px;
+    border-radius: 50px;
+    border: 2px solid white;
+} */
+/* .signup:hover{
+    background-color: rgb(13, 88, 42);
+}
+.signup a{
+    color: white;
+    text-decoration: none;
+    font-size: 0.95rem;
+}
+.signup li a:hover{
+    cursor: pointer;
+    color: rgb(13, 88, 42);
+}
+
+
+
+.signin{
+    margin-right: 60px;
+    text-decoration: none;
+    background-color: transparent;
+    padding: 6px 15px;
+    border-radius: 50px;
+    border: 2px solid white;
+}
+.signin:hover{
+    background-color: rgb(13, 88, 42);
+}
+.signin a{
+    color: white;
+    text-decoration: none;
+    font-size: 0.95rem;
+}
+.signin li a:hover{
+    cursor: pointer;
+    color: rgb(13, 88, 42);
+} */
+
+
+
+
+
+
+/* Same style for both buttons */
+.signup, .signin {
+    text-decoration: none;
+    background-color: transparent;
+    padding: 6px 15px;
+    border-radius: 50px;
+    border: 2px solid white;
+    transition: 0.3s ease;
+    margin-left: 15px;  /* space between buttons */
+}
+
+/* Link inside buttons */
+.signup a, .signin a {
+    color: white;
+    text-decoration: none;
+    font-size: 0.95rem;
+}
+
+/* Hover effect */
+.signup:hover, .signin:hover {
+    background-color: rgb(13, 88, 42);
+    transform: scale(1.05);
+}
+
+/* Group container (align right neatly) */
+.auth-buttons {
+    margin-right: 60px;
+    display: flex;
+    align-items: center;
+}
+
+/* Global button look aligned with index buttons (does not change behavior) */
+button {
+    border-radius: 50px;
+    border: 2px solid rgb(13, 88, 42);
+    background: transparent;
+    color: rgb(13, 88, 42);
+    transition: 0.3s ease;
+}
+button:hover {
+    background: rgb(13, 88, 42);
+    color: #fff;
+    transform: scale(1.05);
+}
+
+
+
+.nav-links{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 32px;
+    list-style: none;
+}
+.nav-links li a:hover{
+    cursor: pointer;
+    color:rgb(43, 88, 43);
+}
+.nav-links li a{
+    text-decoration: none;
+    color: white;
+    font-size: 0.95rem;
+}
+.headline{
+    padding-top: 150px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 2.8rem;
+}
+.con{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color:white;
+}
+.short{
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 120px;
+}
+.box1,.box2,.box3{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.1rem;
+    font-weight: 500;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    border: 2px solid greenyellow;
+    padding: 7px 15px;
+    border-radius: 50px;
+    background-color: rgba(186, 231, 186, 0.6);
+}
+.number{
+    border:2px solid rgb(43,151,43);
+    background: rgb(43, 151, 43);
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    border-radius: 50%;
+}
+.set{
+    margin-top: 70px;
+    width: 100%;
+    height: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: x-large;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin-bottom: 76px;
+}
+.fstline{
+    width: 50%;
+    height: 100%;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.603);
+}
+.tagline{
+    width: 100%;
+    height: 40%;
+    background-color: rgb(186, 231, 186);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-family: 'Roboto';
+}
+.tagline h1{
+    width: 70%;
+    line-height: 1.5em;
+    color:rgba(86, 146, 86, 0.815);
+    font-size: 2rem;
+}
+.tagline h1 span{
+    color:rgba(24, 75, 24, 0.904);
+    font-size: 2.3rem;
+}
+.med{
+    width: 100%;
+    height: 110%;
+    overflow-x: hidden;
+    background-color:rgba(186, 231, 186, 0.486) ;
+    display: flex;
+    justify-content: center;
+}
+.medsec1{
+    width: 70%;
+    height: 100%;
+}
+.medsec1 h1{
+    font-size: 3rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color:rgb(13, 88, 42);
+}
+.inn{
+    padding: 20px 20px 10px;
+}
+.end{
+    margin-bottom: 10px;
+}
+.medsec1 p{
+    font-size: larger;
+    font-family:Arial, Helvetica, sans-serif;
+    line-height: 1.7rem;
+    padding-left: 20px;
+}
+.para{
+    padding-bottom: 15px;
+}
+.para p{
+    padding-bottom: 15px;
+}
+.para button{
+    margin-left: 20px;
+    padding: 7px 15px;
+    border-radius: 50px;
+    background-color: rgb(13, 88, 42);
+    border: 2px solid rgb(13, 88, 42);
+    font-size: 1rem;
+    color: #ffffffe5;
+}
+.para button:hover{
+    background: transparent;
+    color: black;
+    transform: scale(1.05);
+}
+.imgbox{
+    width: 100%;
+    height: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.imag{
+    width: 95%;
+    height: 100%;
+    background-color: #fff;
+    display: flex;
+}
+.imag img{
+    width: 50%;
+    height: 100%;
+    object-fit: cover;
+}
+.medsec2{
+    width: 30%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.textbox{
+    width: 90%;
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+.textbox div{
+    width: 100%;
+    height: 30%;
+    /* background-color: black; */
+    border-radius: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.same{
+    color: rgb(13, 88, 42);
+}
+.doubt{
+    width: 100%;
+    height: 130%;
+    display: flex;
+}
+.left{
+    width: 50%;
+    height: 100%;
+    padding: 50px 20px;
+    font-size: 2rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: rgba(0, 0, 0, 0.801);
+}
+.right{
+    width: 50%;
+    height: auto;
+    padding: 70px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    gap: 10px;
+}
+.right div{
+    padding: 7px 15px;
+    border-radius: 50px;
+    /* background-color: rgba(139, 201, 139, 0.486); */
+    font-size: 1rem;
+    text-align: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.pa{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgba(139, 201, 139, 0.486);
+}
+.i{
+    font-size: 1.5rem;
+}
+.i:hover{
+    cursor: pointer;
+}
+.hide{
+    display: none;
+}
+.footer{
+    width: 100%;
+    height: auto;
+    background-color:  rgba(139, 201, 139, 0.486);
+}
+.icons{
+    padding: 20px 0 20px 0;
+}
+.icons ul{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+    gap: 40px;
+}
+.icons ul li a{
+    font-size: 3rem;
+    text-decoration: none;
+}
+.reserve{
+    width: 100%;
+    padding: 20px 0;
+    background-color: rgb(13, 88, 42);
+    text-align: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color:#fff;
+}
+.answer {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: all 0.4s ease;
+    color: #333;
+    font-size: 0.95rem;
+    padding: 0 10px;
+}
+
+/* When active */
+.answer.show {
+    max-height: 200px; /* enough space for text */
+    opacity: 1;
+    margin-top: 5px;
+}
+
+/* Responsive adjustments to match look across pages */
+@media (max-width: 992px) {
+    .headline { font-size: 2.2rem; }
+    .short { gap: 60px; }
+    .medsec1 { width: 80%; }
+    .medsec2 { width: 40%; }
+}
+
+@media (max-width: 768px) {
+    .nav-links { display: none; }
+    .auth-buttons { margin-right: 20px; }
+    .logo { margin-left: 20px; }
+    .headline { font-size: 2rem; padding-top: 120px; }
+    .short { gap: 24px; flex-wrap: wrap; }
+    .set .fstline { width: 80%; }
+    .tagline h1 { width: 85%; font-size: 1.6rem; }
+    .tagline h1 span { font-size: 1.8rem; }
+    .med { flex-direction: column; align-items: center; }
+    .medsec1, .medsec2 { width: 92%; }
+    .textbox { height: auto; }
+}
+
+@media (max-width: 600px) {
+    .headline { font-size: 1.7rem; }
+    .box1,.box2,.box3 { font-size: 0.95rem; padding: 6px 12px; gap: 8px; }
+    .fstline { width: 90%; font-size: 1.1rem; }
+    .imgbox { height: auto; }
+    .imag { flex-direction: column; }
+    .imag img { width: 100%; height: auto; }
+    .right { padding: 20px; }
+    .footer .icons ul { gap: 24px; }
+}

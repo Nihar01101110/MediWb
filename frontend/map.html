@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MediWeb - Map</title>
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+<style>
+:root {
+  --bg: rgba(139, 201, 139, 0.486);
+  --card: #ffffff;
+  --accent: rgb(13, 88, 42);
+  --radius: 12px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  background: linear-gradient(180deg, var(--bg), #eef6fb);
+  font-family: 'Segoe UI', sans-serif;
+}
+
+/* Navbar */
+.nav {
+  width: 100%;
+  height: 70px;
+  background-color: rgb(13, 88, 42);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 60px;
+}
+.logo a {
+  text-decoration: none;
+  color: white;
+  font-size: 2.3rem;
+}
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  list-style: none;
+}
+.nav-links li a {
+  text-decoration: none;
+  color: white;
+  font-size: 0.95rem;
+}
+.nav-links li a:hover {
+  color: rgba(139, 201, 139, 0.8);
+  cursor: pointer;
+}
+
+/* Wrapper & Content */
+.wrapper { 
+  max-width: 1200px; 
+  margin: 120px auto 40px auto; /* Push content below navbar */
+  padding: 20px;
+}
+.card h1, .card h3 {
+  color: rgb(13, 88, 42);
+}
+.card p {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+button { 
+  padding: 10px 20px; 
+  border: none; 
+  background: rgb(13, 88, 42); 
+  color: #fff; 
+  border-radius: 50px; 
+  cursor: pointer; 
+}
+button:hover { 
+  background: transparent; 
+  border: 2px solid rgb(13, 88, 42);
+  color: black;
+}
+#map { 
+  height: 300px; 
+  width: 100%; 
+  border-radius: 12px; 
+  margin-top: 15px; 
+}
+</style>
+</head>
+<body>
+
+<div class="nav">
+  <div class="logo"><a href=""><span>Med</span>iW<span>b</span></a></div>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="medicineSearch.html">Medicines</a></li>
+    <li><a href="chatBot.html">Chatbot</a></li>
+    <li><a href="map.html">Map</a></li>
+    <li><a href="faqs.html">FAQS</a></li>
+  </ul>
+</div>
+
+<div class="wrapper">
+  <div class="card">
+    <h1>Location</h1>
+    <p>Locate nearby hospitals, clinics, and pharmacies in real time. This ensures quick access to essential healthcare facilities, especially in urgent situations. Whether it’s finding the closest pharmacy for a medicine or reaching a hospital in an emergency, the map provides accurate and reliable support at the right time.</p>
+    <h3>Nearby Pharmacies</h3>
+    <button id="findStoresBtn" onclick="findNearbyPharmacies()">Check</button>
+    <div id="map"></div>
+  </div>
+</div>
+
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script>
+let map, userLocation, pharmaciesLayer;
+
+function initMap() {
+  map = L.map('map').setView([20, 77], 5); // India center
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(pos => {
+      userLocation = [pos.coords.latitude, pos.coords.longitude];
+      map.setView(userLocation, 15);
+      L.marker(userLocation).addTo(map).bindPopup("📍 You are here").openPopup();
+    });
+  }
+}
+
+async function findNearbyPharmacies() {
+  if (!userLocation) return alert("⚠️ Location not available yet.");
+
+  const [lat, lon] = userLocation;
+  const query = `
+    [out:json];
+    ( node["amenity"="pharmacy"](around:3000,${lat},${lon}); );
+    out;
+  `;
+  const url = "https://overpass-api.de/api/interpreter?data=" + encodeURIComponent(query);
+
+  const res = await fetch(url);
+  const data = await res.json();
+
+  if (pharmaciesLayer) map.removeLayer(pharmaciesLayer);
+  pharmaciesLayer = L.layerGroup().addTo(map);
+
+  data.elements.forEach(p => {
+    L.marker([p.lat, p.lon]).addTo(pharmaciesLayer).bindPopup("🏥 " + (p.tags.name || "Pharmacy"));
+  });
+}
+
+window.onload = initMap;
+</script>
+</body>
+</html>
